@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>My first three.js app</title>
+		<style>
+			body { margin: 0; }
+		</style>
+	</head>
+	<body>
+        <script src="https://rawgithub.com/mrdoob/three.js/master/build/three.js"></script>
+		<script>
+
+			const scene = new THREE.Scene();           
+			const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+                                                     
+
+			const renderer = new THREE.WebGLRenderer();
+			renderer.setSize( window.innerWidth, window.innerHeight );
+			document.body.appendChild( renderer.domElement );
+
+			const geometry = new THREE.BoxGeometry();
+            //const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+            const material = new THREE.MeshPhongMaterial( { color: '#006063',
+                                specular: '#a9fcff', shininess: 100 } );
+
+			const cube = new THREE.Mesh( geometry, material );
+			scene.add( cube );
+
+
+            // lights
+            var dLight = new THREE.DirectionalLight(0xffffff);
+            dLight.position.set(0, 5, 0)
+            scene.add(dLight)
+
+            var alight = new THREE.AmbientLight(0xffffff);
+            scene.add(alight)
+
+			camera.position.z = 5;
+
+			const animate = function () {
+				requestAnimationFrame( animate );
+
+				cube.rotation.x += 0.05;
+				cube.rotation.y += 0.05;
+
+				renderer.render( scene, camera );
+            };
+            
+            
+
+            window.addEventListener('resize', function() {
+                var w = window.innerWidth;
+                var h = window.innerHeight;
+                renderer.setSize( w, h );
+                camera.aspect = w / h;
+                camera.updateProjectionMatrix();
+                
+                renderer.render( scene, camera );
+            })
+
+            //renderer.render( scene, camera );
+            animate();
+			
+		</script>
+	</body>
+</html>

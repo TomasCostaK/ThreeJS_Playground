@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>My first three.js app</title>
+		<style>
+			body { margin: 0; }
+		</style>
+	</head>
+	<body>
+        <script src="https://rawgithub.com/mrdoob/three.js/master/build/three.js"></script>
+		<script>
+
+			const scene = new THREE.Scene();           
+			const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+                                                     
+
+			const renderer = new THREE.WebGLRenderer();
+			renderer.setSize( window.innerWidth, window.innerHeight );
+			document.body.appendChild( renderer.domElement );
+
+            // 2 e 3 parametro cria varios segmentos na horizontal e vertical, facil de ver na documentação mudando o controlo
+            const sphereA = new THREE.SphereGeometry(1, 10, 10); 
+        
+            const material = new THREE.MeshPhongMaterial( { color: '#006063',
+                                specular: '#a9fcff', shininess: 100, flatShading: false } );
+      
+            const sphere_mesh1 = new THREE.Mesh( sphereA, material );
+            
+            sphere_mesh1.position.x = -2.5;
+
+            scene.add( sphere_mesh1 );
+
+            const sphereB = new THREE.SphereGeometry(1, 10, 10); 
+
+            // flatshading Define se o material é renderizado com sombreamento plano. O padrão é falso.
+            const material2 = new THREE.MeshPhongMaterial( { color: '#006063',
+                    specular: '#a9fcff', shininess: 100, flatShading: true } );
+
+            const sphere_mesh2 = new THREE.Mesh( sphereB, material2 );
+
+            sphere_mesh2.position.x = 2.5
+
+            scene.add(sphere_mesh2)
+
+            // lights
+            var dLight = new THREE.DirectionalLight(0xffffff);
+            dLight.position.set(0, 5, 0)
+            scene.add(dLight)
+
+            var alight = new THREE.AmbientLight(0xffffff);
+            scene.add(alight)
+      
+			camera.position.z = 5;
+
+			const animate = function () {
+				requestAnimationFrame( animate );
+
+				sphere_mesh1.rotation.x += 0.05;
+                sphere_mesh1.rotation.y += 0.05;
+                
+                sphere_mesh2.rotation.x += 0.05;
+                sphere_mesh2.rotation.y += 0.05;
+
+				renderer.render( scene, camera );
+            };
+            
+            
+
+            window.addEventListener('resize', function() {
+                var w = window.innerWidth;
+                var h = window.innerHeight;
+                renderer.setSize( w, h );
+                camera.aspect = w / h;
+                camera.updateProjectionMatrix();
+                
+                renderer.render( scene, camera );
+            })
+
+            animate();
+			
+		</script>
+	</body>
+</html>
