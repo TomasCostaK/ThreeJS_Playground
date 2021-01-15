@@ -7,18 +7,23 @@
 		</style>
 	</head>
 	<body>
+
 		<script src="https://rawgithub.com/mrdoob/three.js/master/build/three.js"></script>
+		<script src="TrackballControls.js"></script>
 		<script src="OrbitControls.js"></script>
+		
 		<script>
 
 			const scene = new THREE.Scene();
 
             let width = window.innerWidth;
             let height = window.innerHeight;
-            
-			const camera = new THREE.OrthographicCamera( -5, 5,
-                                                        -3, 3,
-                                                     0.01, 1000 );
+			
+			const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+
+			//const camera = new THREE.OrthographicCamera( -5, 5,
+            //                                            -3, 3,
+            //                                         0.01, 1000 );
                                                      
 
 			const renderer = new THREE.WebGLRenderer();
@@ -26,7 +31,9 @@
 
 			document.body.appendChild( renderer.domElement );
 
-			var controls = new THREE.OrbitControls(camera, renderer.domElement);
+		
+			//var controls = new THREE.OrbitControls(camera, renderer.domElement);
+			var controls = new THREE.TrackballControls(camera, renderer.domElement);
 
 			const geometry = new THREE.BoxGeometry();
 			const material = new THREE.MeshBasicMaterial( { color: 0x00ff00, wireframe : true } );
@@ -39,8 +46,8 @@
 
 				requestAnimationFrame( animate );
 
-				cube.rotation.x += 0.01;
-				cube.rotation.y += 0.01;
+				cube.rotation.x += 0.00;
+				cube.rotation.y += 0.00;
 
                 controls.update();
 
