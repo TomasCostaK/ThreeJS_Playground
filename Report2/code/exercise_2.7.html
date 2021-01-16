@@ -117,8 +117,8 @@
             axis_z.rotation.x = 1.6
             axis_z.position.y = -0.5
             axis_z.position.x = -0.5
+            axis_z.position.z = -1
             axis.add(axis_z)
-
 
             //add axis
             scene.add(axis)
@@ -134,7 +134,7 @@
                 controls.update();
 
                 // animate the car
-                //car.position.z -= 0.01
+                car.position.z -= 0.01
 
 				renderer.render( scene, camera );
 
