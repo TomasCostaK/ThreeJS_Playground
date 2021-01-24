@@ -28,9 +28,11 @@
                     specular: '#a9fcff',shininess: 100, map: tex } );
 
             const sphere_mesh = new THREE.Mesh( sphere, material );
-           
 
+            sphere_mesh.rotation.z=0.041;
+            
             scene.add(sphere_mesh)
+
             
             // lights
             var dLight = new THREE.DirectionalLight(0xffffff);
@@ -41,6 +43,9 @@
             scene.add(alight)
       
 			camera.position.z = 5;
+
+
+            
 
 			const animate = function () {
 				requestAnimationFrame( animate );
