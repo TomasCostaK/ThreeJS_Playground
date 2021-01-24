@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>My first three.js app</title>
+		<style>
+			body { margin: 0; }
+		</style>
+	</head>
+	<body>
+
+		<script src="https://rawgithub.com/mrdoob/three.js/master/build/three.js"></script>
+	
+		
+		<script>
+
+			const scene = new THREE.Scene();
+
+            let width = window.innerWidth;
+            let height = window.innerHeight;
+			
+			const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+                                    
+
+			const renderer = new THREE.WebGLRenderer();
+			renderer.setSize( window.innerWidth, window.innerHeight );
+
+			document.body.appendChild( renderer.domElement );
+
+		
+
+			const geometry = new THREE.BoxGeometry();
+
+            // textures
+
+            var textloader = new THREE.TextureLoader();
+
+			var tex_1=textloader.load("Im1.jpg")
+            var tex_2=textloader.load("Im2.jpg")
+            var tex_3=textloader.load("Im3.jpg")
+            var tex_4=textloader.load("Im4.jpg")
+            var tex_5=textloader.load("Im5.jpg")
+            var tex_6=textloader.load("Im6.jpg")
+
+            // material
+
+			const material_1 = new THREE.MeshBasicMaterial( { color: "green", map: tex_1 } );
+            const material_2 = new THREE.MeshBasicMaterial( { color: "white", map: tex_2 } );
+            const material_3 = new THREE.MeshBasicMaterial( { color: "yellow", map: tex_3 } );
+            const material_4 = new THREE.MeshBasicMaterial( { color: "purple", map: tex_4 } );
+            const material_5 = new THREE.MeshBasicMaterial( { color: "blue", map: tex_5 } );
+            const material_6 = new THREE.MeshBasicMaterial( { color: "red", map: tex_6 } );
+
+            var material = [material_1, material_2 ,material_3 ,material_4 ,material_5, material_6]
+        
+			const cube = new THREE.Mesh( geometry, material );
+
+			scene.add( cube );
+
+			camera.position.z = 5;
+
+			const animate = function () {
+
+				requestAnimationFrame( animate );
+
+				cube.rotation.x += 0.04;
+				cube.rotation.y += 0.04;
+
+				renderer.render( scene, camera );
+
+            };
+            
+            
+
+            window.addEventListener('resize', function() {
+                var w = window.innerWidth;
+                var h = window.innerHeight;
+                renderer.setSize( w, h );
+                camera.aspect = w / h;
+                camera.updateProjectionMatrix();
+                
+                renderer.render( scene, camera );
+            })
+
+            //renderer.render( scene, camera );
+            animate();
+			
+		</script>
+	</body>
+</html>
